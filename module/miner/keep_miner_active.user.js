@@ -11,7 +11,6 @@
 
 (function() {
     //'use strict';
-
     //activity log.
     function log(message){
        console.log(message);
@@ -23,21 +22,30 @@
 
     //https://www.codegrepper.com/code-examples/javascript/javascript+execute+function+after+element+load
     function runAfterElementExists(jquery_element,callback){
-        var checker = window.setInterval(function() {
+        console.log("RRRRRRR");
+        var checker = window.setTimeout(function() {
+            console.log("Button ",jquery_element);
             //if one or more elements have been yielded by jquery
             //using this selector
+            console.log("BUTTONS COUNT ",jquery_element.length);
             if (jquery_element.length) {
+                console.log("BUTTON LOADED!");
 
                 //stop checking for the existence of this element
                 clearInterval(checker);
 
                 //call the passed in function via the parameter above
                 callback();
-            }}, 200); //I usually check 5 times per second
+            }else{
+                console.log("BUTTON NOT LOADED YET!");
+            }
+        }, 5000); //I usually check 5 times per second
     }
 
 
+
 $(document).ready(function(){
+
     log("loaded");
     //check if mining button is active. If so, click  the button.
     var mineButtonContent = $("div:contains('Mining 4 hours')");
@@ -48,11 +56,18 @@ $(document).ready(function(){
     }else{
        log("no mine button!!!");
     }*/
-
+console.log("QQQQQQ");
     runAfterElementExists($("div:contains('Mining 4 hours')").closest("button"), function() {
         console.log("item loaded");
         $("div:contains('Mining 4 hours')").closest("button").click();
     });
+
+    //do after click the mine button.
+    $("div:contains('Mining 4 hours')").closest("button").on("click",function(){
+      console.log("Mine button clicked!!!");
+        //beep(100, 520, 200);
+    });
+
 
     //refresh the page every X minutes.
     var min = 1000*60*5;
