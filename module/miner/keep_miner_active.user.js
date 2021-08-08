@@ -56,14 +56,26 @@ $(document).ready(function(){
     }else{
        log("no mine button!!!");
     }*/
-console.log("QQQQQQ");
-    runAfterElementExists($("div:contains('Mining 4 hours')").closest("button"), function() {
+    log("QQQQQQ");
+    setTimeout(function(){
+        let divsCount = $("div:contains('Mining 4 hours')").length;
+        console.log("Waited 10 seconds. Divs :", divsCount);
+        if(divsCount>0){
+          $("div:contains('Mining 4 hours')")[divsCount-1].closest("button").click();
+          log("Clicked "+(divsCount)+ " div button");
+        }else{
+          log("No Mine Start Element");
+        }
+    },10000);
+
+    /**runAfterElementExists($("div:contains('Mining 4 hours')")[0].closest("button"), function() {
         console.log("item loaded");
-        $("div:contains('Mining 4 hours')").closest("button").click();
+        $("div:contains('Mining 4 hours')")[0].closest("button").click();
     });
+    */
 
     //do after click the mine button.
-    $("div:contains('Mining 4 hours')").closest("button").on("click",function(){
+    $("div:contains('Mining 4 hours')")[0].closest("button").on("click",function(){
       console.log("Mine button clicked!!!");
         //beep(100, 520, 200);
     });
