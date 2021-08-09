@@ -59,7 +59,16 @@ $(document).ready(function(){
     log("QQQQQQ");
     setTimeout(function(){
         let divsCount = $("div:contains('Mining 4 hours')").length;
-        console.log("Waited 10 seconds. Divs :", divsCount);
+        let logedOutDivsCount = $("#modal >div:contains('You have been logged out due to')").length;
+        if(logedOutDivsCount >0){
+            log("LOGGED OUT, reload the page to login!!!");
+            window.location.reload(1);
+
+        }
+
+
+
+        console.log("Waited 10 seconds. Mine start Divs :", divsCount);
         if(divsCount>0){
           $("div:contains('Mining 4 hours')")[divsCount-1].closest("button").click();
           log("Clicked "+(divsCount)+ " div button");
@@ -75,10 +84,12 @@ $(document).ready(function(){
     */
 
     //do after click the mine button.
-    $("div:contains('Mining 4 hours')")[0].closest("button").on("click",function(){
-      console.log("Mine button clicked!!!");
-        //beep(100, 520, 200);
-    });
+    if($("div:contains('Mining 4 hours')").length){
+      $("div:contains('Mining 4 hours')")[0].closest("button").on("click",function(){
+          console.log("Mine button clicked!!!");
+      });
+    }
+  
 
 
     //refresh the page every X minutes.
